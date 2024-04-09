@@ -1,13 +1,12 @@
-<nav>
-    <h2>NavBard</h2>
-    <div class="menu">
-        <ul>
-            <li [routerLink]="['/articles']">Lista de artículos</li>
-            <li [routerLink]="['/articles', 'detalle']">Detalle del artículo</li>
-            <li [routerLink]="['/dashboard']">Dashboard de administración</li>
-            <li [routerLink]="['/dashboard', 'calendar']">Calendario de administración</li>
-            <li [routerLink]="['/register']">Registro</li>
-            <li [routerLink]="['/login']">Login</li>
-        </ul>
+
+<div class="content">
+    <div id="nav-bar">
+        <div id="nav-bar-container">
+            @for (item of menu; track $index) {
+                <a (click)="active(item)" class="nav-bar-item" [ngClass]="item.active === true? 'isActive': ''">{{item.name}}</a>
+            }
+        </div>
     </div>
-</nav>
+    <img src="https://www.audisoft.com/wp-content/uploads/sites/2/2023/04/Logo-230x38.png" id="site-title-icon" /> 
+</div>
+

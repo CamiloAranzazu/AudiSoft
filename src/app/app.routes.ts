@@ -1,18 +1,16 @@
 import { Routes } from '@angular/router';
-import { loggedGuard } from './core/guards/logged.guard';
 
 export const routes: Routes = [
     {
-        path: '',
-        loadChildren: () => import('./auth/auth.routes').then(m => m.AUTH_ROUTES),
-        canActivate: [loggedGuard]
+        path: 'notas',
+        loadChildren: () => import('./notas/notas.routes').then(m => m.NOTAS_ROUTES)
     },
     {
-        path: 'articles',
-        loadChildren: () => import('./articles/articles.routes').then(m => m.ARTICLES_ROUTES)
+        path: 'profesores',
+        loadChildren: () => import('./profesores/profesores.routes').then(m => m.PROFESORES_ROUTES)
     },
     {
-        path: 'dashboard',
-        loadChildren: () => import('./admin/admin.routes').then(m => m.ADMIN_ROUTES)
+        path: 'estudiantes',
+        loadChildren: () => import('./estudiantes/estudiantes.routes').then(m => m.ESTUDIANTES_ROUTES)
     }
-];
+]; 
