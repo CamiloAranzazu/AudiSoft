@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router, RouterEvent, RouterLink } from '@angular/router';
 import { SharedLibreriasModule } from '../../modules/shared.module';
 import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,6 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class NavBarComponent implements OnInit {
     
+  url: any = '';
   // lista de estudiantes
     menu: any[] = [
       {id: 1, name: 'NOTAS', active: true, ruta: '/notas' },
@@ -19,18 +21,25 @@ export class NavBarComponent implements OnInit {
       {id: 3, name: 'ESTUDIANTES', active: false, ruta: '/estudiantes' },
     ];
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private ar: ActivatedRoute,) {
+      this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe((ev: NavigationEnd) => {
+        this.setActiveStyleMenuNavBar(ev.url);
+      });
     }
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     // para activar el menu
     active(menu: any) {
-      this.menu.forEach((me: any) => {
-        me.id === menu.id ? me.active = true: me.active = false;
-      });
       this.router.navigate([menu.ruta]);
+    }
+
+    setActiveStyleMenuNavBar(url: string) {
+      this.menu.forEach((item: any) => {
+        url === item.ruta ? item.active = true: item.active = false;
+      });
     }
 
 

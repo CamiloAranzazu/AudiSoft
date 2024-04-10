@@ -15,31 +15,31 @@
     <!-- Name Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> Id </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      <td mat-cell *matCellDef="let element" [ngClass]="element.valor < 3 ? 'redB': ''"> {{element.id}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="estudiante">
       <th mat-header-cell *matHeaderCellDef> Nombre Estudiante </th>
-      <td mat-cell *matCellDef="let element"> {{element.estudiante.nombre}} </td>
+      <td mat-cell *matCellDef="let element" [ngClass]="element.valor < 3 ? 'redB': ''"> {{element.estudiante.nombre}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="profesor">
       <th mat-header-cell *matHeaderCellDef> Nombre Profesor </th>
-      <td mat-cell *matCellDef="let element"> {{element.profesor.nombre}} </td>
+      <td mat-cell *matCellDef="let element" [ngClass]="element.valor < 3 ? 'redB': ''"> {{element.profesor.nombre}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="nombre">
       <th mat-header-cell *matHeaderCellDef> Nombre Materia </th>
-      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+      <td mat-cell *matCellDef="let element" [ngClass]="element.valor < 3 ? 'redB': ''"> {{element.nombre}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="nota">
       <th mat-header-cell *matHeaderCellDef> NOTA </th>
-      <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
+      <td mat-cell *matCellDef="let element" [ngClass]="element.valor < 3 ? 'redB': ''"> {{element.valor}} </td>
     </ng-container>
 
   
@@ -55,5 +55,5 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
   

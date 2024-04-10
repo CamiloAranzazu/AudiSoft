@@ -42,9 +42,9 @@ export class NotasComponent {
   }
   
 
-  openDialogCRUD(IsPost: boolean, data: any, model: string) {
+  openDialogCRUD(IsPost: boolean, data: any, model: string, title: string) {
     const dialogRef = this.dialog.open(DialogCreateEditComponent, {
-      data: {IsPost, data, model},
+      data: {IsPost, data, model, title},
       width: '500px',
       disableClose: true,
       panelClass: 'custom-dialog-transparent'
@@ -75,7 +75,7 @@ export class NotasComponent {
   }
 
   create() { 
-    this.openDialogCRUD(true, undefined, 'notas').afterClosed().subscribe(rest => {
+    this.openDialogCRUD(true, undefined, 'notas', 'CREAR NOTA').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('CREADO CORRECTAMENTE!', '', {duration: 4000})
         this.getNotas();
@@ -84,7 +84,7 @@ export class NotasComponent {
   }
 
   update(estudiante:any) { 
-    this.openDialogCRUD(false, estudiante, 'notas').afterClosed().subscribe(rest => {
+    this.openDialogCRUD(false, estudiante, 'notas', 'ACTUALIZAR ESTUDIANTE').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('ACTUALIZADO CORRECTAMENTE!', '', {duration: 4000});
         this.getNotas();

@@ -42,9 +42,9 @@ export class ProfesoresComponent {
   }
   
 
-  openDialogCRUD(IsPost: boolean, data: any, model: string) {
+  openDialogCRUD(IsPost: boolean, data: any, model: string, title: string) {
     const dialogRef = this.dialog.open(DialogCreateEditComponent, {
-      data: {IsPost, data, model},
+      data: {IsPost, data, model, title},
       width: '500px',
       disableClose: true,
       panelClass: 'custom-dialog-transparent'
@@ -63,10 +63,10 @@ export class ProfesoresComponent {
   }
 
 
-  delete(estudiante: any) { 
+  delete(profesor: any) { 
     this.openDialogDelete().afterClosed().subscribe(rest => {
       if(rest !== false) {
-        this.serviceProfesores.deleteEstudiante(estudiante.id).subscribe(rest =>{
+        this.serviceProfesores.deleteEstudiante(profesor.id).subscribe(rest =>{
           this._sb.open('ELIMINADO CORRECTAMENTE!', '', {duration: 4000});
           this.getProfesores();
         });
@@ -75,7 +75,7 @@ export class ProfesoresComponent {
   }
 
   create() { 
-    this.openDialogCRUD(true, undefined, 'profesores').afterClosed().subscribe(rest => {
+    this.openDialogCRUD(true, undefined, 'profesores', 'CREAR PROFESOR').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('CREADO CORRECTAMENTE!', '', {duration: 4000})
         this.getProfesores();
@@ -83,8 +83,8 @@ export class ProfesoresComponent {
     });
   }
 
-  update(estudiante:any) { 
-    this.openDialogCRUD(false, estudiante, 'profesores').afterClosed().subscribe(rest => {
+  update(profesor:any) { 
+    this.openDialogCRUD(false, profesor, 'profesores', 'CREAR PROFESOR').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('ACTUALIZADO CORRECTAMENTE!', '', {duration: 4000});
         this.getProfesores();

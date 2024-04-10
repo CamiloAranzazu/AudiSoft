@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 
+const defaultRedirect = '/notas';
+
 export const routes: Routes = [
     {
         path: 'notas',
@@ -12,5 +14,6 @@ export const routes: Routes = [
     {
         path: 'estudiantes',
         loadChildren: () => import('./estudiantes/estudiantes.routes').then(m => m.ESTUDIANTES_ROUTES)
-    }
+    },
+    { path: '**', redirectTo: defaultRedirect, pathMatch: 'full' },
 ]; 

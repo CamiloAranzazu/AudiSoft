@@ -11,6 +11,7 @@ export interface DialogData {
   IsPost: boolean;
   data: any;
   model: string;
+  title: string;
 }
 
 @Component({
@@ -116,6 +117,8 @@ export class DialogCreateEditComponent implements OnInit {
           });
         } 
       } 
+    } else {
+      this.form.markAllAsTouched();
     }
   } 
 
@@ -143,6 +146,8 @@ export class DialogCreateEditComponent implements OnInit {
           this.dialogRef.close(true);
         });
       } 
+    } else {
+      this.formNotas.markAllAsTouched();
     }
   }
 

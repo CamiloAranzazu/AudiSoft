@@ -1,17 +1,17 @@
-<h2 mat-dialog-title>{{data.IsPost === true ? 'CREAR': 'ACTUALIZAR'}}</h2>
+<h2 mat-dialog-title>{{data.title || 'SIN LITERAL'}}</h2>
 <mat-dialog-content>
   <form [formGroup]="form" *ngIf="data.model !== 'notas'">
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Nombre y Apellido</mat-label>
       <input matInput formControlName="nombre">
     </mat-form-field>
   </form>
   <form [formGroup]="formNotas" *ngIf="data.model === 'notas'">
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Nombre</mat-label>
       <input matInput formControlName="nombre">
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Profesor</mat-label>
       <select matNativeControl required formControlName="IdProfesor">
         @for (item of profesores; track $index) {
@@ -19,7 +19,7 @@
         }
       </select>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Estudiante</mat-label>
       <select matNativeControl required formControlName="IdEstudiante">
         @for (item of estudiantes; track $index) {
@@ -27,14 +27,14 @@
         }
       </select>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Nota</mat-label>
       <input matInput type="number" formControlName="valor">
     </mat-form-field>
   </form>
 </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="close()" >CANCELAR</button>
-  <button mat-button *ngIf="data.model !== 'notas'" (click)="save()">{{data.IsPost === true ? 'CREAR': 'ACTUALIZAR'}}</button>
-  <button mat-button *ngIf="data.model === 'notas'" (click)="saveNotas()">{{data.IsPost === true ? 'CREAR': 'ACTUALIZAR'}}</button>
-</mat-dialog-actions> 
+<mat-dialog-actions class="actions">
+  <button mat-stroked-button  (click)="close()" >CANCELAR</button>
+  <button mat-button class="btnAction" *ngIf="data.model !== 'notas'" (click)="save()">{{data.title || 'SIN LITERAL'}}</button>
+  <button mat-button class="btnAction" *ngIf="data.model === 'notas'" (click)="saveNotas()">{{data.title || 'SIN LITERAL'}}</button>
+</mat-dialog-actions>  
