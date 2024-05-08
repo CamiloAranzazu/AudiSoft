@@ -1,19 +1,19 @@
 import { Routes } from '@angular/router';
 
-const defaultRedirect = '/notas';
+const defaultRedirect = '/reservas';
 
 export const routes: Routes = [
     {
-        path: 'notas',
-        loadChildren: () => import('./notas/notas.routes').then(m => m.NOTAS_ROUTES)
+        path: 'reservas',
+        loadChildren: () => import('./reservas/reservas.routes').then(m => m.RESERVAS_ROUTES)
     },
     {
-        path: 'profesores',
-        loadChildren: () => import('./profesores/profesores.routes').then(m => m.PROFESORES_ROUTES)
+        path: 'habitaciones',
+        loadChildren: () => import('./habitaciones/habitaciones.routes').then(m => m.HABITACIONES_ROUTES)
     },
     {
-        path: 'estudiantes',
-        loadChildren: () => import('./estudiantes/estudiantes.routes').then(m => m.ESTUDIANTES_ROUTES)
+        path: 'hoteles',
+        loadChildren: () => import('./hotel/hoteles.routes').then(m => m.HOTELES_ROUTES)
     },
     { path: '**', redirectTo: defaultRedirect, pathMatch: 'full' },
 ]; 

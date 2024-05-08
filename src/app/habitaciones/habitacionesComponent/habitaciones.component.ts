@@ -9,31 +9,31 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { NotasService } from '../notas.service';
+import { HabitacionesService } from '../habitaciones.service';
 
 
 @Component({
-  selector: 'app-notas',
+  selector: 'app-habitaciones',
   standalone: true,
-  imports: [CommonModule, SharedLibreriasModule],
-  templateUrl: './notas.component.html',
-  styleUrl: './notas.component.scss'
+  imports: [SharedLibreriasModule, CommonModule],
+  templateUrl: './habitaciones.component.html',
+  styleUrl: './habitaciones.component.scss'
 })
-export class NotasComponent {
-  displayedColumns: string[] = ['no', 'id', 'estudiante', 'profesor','nombre', 'nota', 'op'];
+export class HabitacionesComponent {
+  displayedColumns: string[] = ['no', 'id', 'idHotel', 'type', 'priceAlto', 'priceBajo', 'maximoP', 'op'];
   dataSource!: MatTableDataSource<any>;
 
-  Notas: any[] = []; 
+  Habitaciones: any[] = []; 
 
   @ViewChild('paginator', {read: MatPaginator}) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private serviceNotas: NotasService, private _sb: MatSnackBar) {
-    this.getNotas();
+  constructor(public dialog: MatDialog, private serviceHabitaciones: HabitacionesService, private _sb: MatSnackBar) {
+    this.getHabitaciones();
   }
 
-  getNotas() {
-    this.serviceNotas.getNotas().subscribe(rest => {
+  getHabitaciones() {
+    this.serviceHabitaciones.getHabitaciones().subscribe(rest => {
       this.dataSource = new MatTableDataSource(rest);
 
       this.dataSource.paginator = this.paginator;
@@ -63,31 +63,31 @@ export class NotasComponent {
   }
 
 
-  delete(estudiante: any) { 
+  delete(profesor: any) { 
     this.openDialogDelete().afterClosed().subscribe(rest => {
       if(rest !== false) {
-        this.serviceNotas.deleteEstudiante(estudiante.id).subscribe(rest =>{
+        this.serviceHabitaciones.deleteHabitacion(profesor.id).subscribe(rest =>{
           this._sb.open('ELIMINADO CORRECTAMENTE!', '', {duration: 4000});
-          this.getNotas();
+          this.getHabitaciones();
         });
       }
     });
   }
 
   create() { 
-    this.openDialogCRUD(true, undefined, 'notas', 'CREAR NOTA').afterClosed().subscribe(rest => {
+    this.openDialogCRUD(true, undefined, 'Habitaciones', 'CREAR').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('CREADO CORRECTAMENTE!', '', {duration: 4000})
-        this.getNotas();
+        this.getHabitaciones();
       }
     });
   }
 
-  update(estudiante:any) { 
-    this.openDialogCRUD(false, estudiante, 'notas', 'ACTUALIZAR ESTUDIANTE').afterClosed().subscribe(rest => {
+  update(profesor:any) { 
+    this.openDialogCRUD(false, profesor, 'Habitaciones', 'CREAR').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('ACTUALIZADO CORRECTAMENTE!', '', {duration: 4000});
-        this.getNotas();
+        this.getHabitaciones();
       }
     });
   }

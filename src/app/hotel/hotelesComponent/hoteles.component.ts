@@ -1,38 +1,37 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { SharedLibreriasModule } from '../../shared/modules/shared.module';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCreateEditComponent } from '../../shared/components/dialogs/dialog-create-edit/dialog-create-edit.component';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogConfirmComponent } from '../../shared/components/dialogs/dialog-confirm/dialog-confirm.component';
-import { EstudiantesService } from '../estudiantes.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { HotelesService } from '../hoteles.service';
 
 @Component({
-  selector: 'app-estudiantes',
+  selector: 'app-hoteles',
   standalone: true,
   imports: [SharedLibreriasModule, CommonModule],
-  templateUrl: './estudiantes.component.html',
-  styleUrl: './estudiantes.component.scss'
+  templateUrl: './hoteles.component.html',
+  styleUrl: './hoteles.component.scss'
 })
-export class EstudiantesComponent {
-  displayedColumns: string[] = ['no', 'id', 'estudiante', 'op'];
+export class HotelesComponent {
+  displayedColumns: string[] = ['no', 'id', 'nombre', 'city', 'op'];
   dataSource!: MatTableDataSource<any>;
 
-  estudiantes: any[] = []; 
+  Hoteles: any[] = []; 
 
   @ViewChild('paginator', {read: MatPaginator}) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private serviceEstudiantes: EstudiantesService, private _sb: MatSnackBar) {
-    this.getEstudiantes();
+  constructor(public dialog: MatDialog, private serviceHoteles: HotelesService, private _sb: MatSnackBar) {
+    this.getHoteles();
   }
 
-  getEstudiantes() {
-    this.serviceEstudiantes.getEstudiantes().subscribe(rest => {
+  getHoteles() {
+    this.serviceHoteles.getHoteles().subscribe(rest => {
       this.dataSource = new MatTableDataSource(rest);
 
       this.dataSource.paginator = this.paginator;
@@ -65,28 +64,28 @@ export class EstudiantesComponent {
   delete(estudiante: any) { 
     this.openDialogDelete().afterClosed().subscribe(rest => {
       if(rest !== false) {
-        this.serviceEstudiantes.deleteEstudiante(estudiante.id).subscribe(rest =>{
+        this.serviceHoteles.deleteHotel(estudiante.id).subscribe(rest =>{
           this._sb.open('ELIMINADO CORRECTAMENTE!', '', {duration: 4000});
-          this.getEstudiantes();
+          this.getHoteles();
         });
       }
     });
   }
 
   create() { 
-    this.openDialogCRUD(true, undefined, 'estudiantes', 'CREAR ESTUDIANTE').afterClosed().subscribe(rest => {
+    this.openDialogCRUD(true, undefined, 'Hoteles', 'CREAR').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('CREADO CORRECTAMENTE!', '', {duration: 4000})
-        this.getEstudiantes();
+        this.getHoteles();
       }
     });
   }
 
   update(estudiante:any) { 
-    this.openDialogCRUD(false, estudiante, 'estudiantes', 'ACTUALIZAR ESTUDIANTE').afterClosed().subscribe(rest => {
+    this.openDialogCRUD(false, estudiante, 'Hoteles', 'ACTUALIZAR').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('ACTUALIZADO CORRECTAMENTE!', '', {duration: 4000});
-        this.getEstudiantes();
+        this.getHoteles();
       }
     });
   }

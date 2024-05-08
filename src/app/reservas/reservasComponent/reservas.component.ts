@@ -9,31 +9,31 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ProfesoresService } from '../profesores.service';
+import { ReservasService } from '../reservas.service';
 
 
 @Component({
-  selector: 'app-profesores',
+  selector: 'app-reservas',
   standalone: true,
-  imports: [SharedLibreriasModule, CommonModule],
-  templateUrl: './profesores.component.html',
-  styleUrl: './profesores.component.scss'
+  imports: [CommonModule, SharedLibreriasModule],
+  templateUrl: './reservas.component.html',
+  styleUrl: './reservas.component.scss'
 })
-export class ProfesoresComponent {
-  displayedColumns: string[] = ['no', 'id', 'estudiante', 'op'];
+export class ReservasComponent {
+  displayedColumns: string[] = ['no', 'id', 'nombre', 'ciudad','hotel', 'precio', 'op'];
   dataSource!: MatTableDataSource<any>;
 
-  Profesores: any[] = []; 
+  Reservas: any[] = []; 
 
   @ViewChild('paginator', {read: MatPaginator}) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog, private serviceProfesores: ProfesoresService, private _sb: MatSnackBar) {
-    this.getProfesores();
+  constructor(public dialog: MatDialog, private serviceReservas: ReservasService, private _sb: MatSnackBar) {
+    this.getReservas();
   }
 
-  getProfesores() {
-    this.serviceProfesores.getProfesores().subscribe(rest => {
+  getReservas() {
+    this.serviceReservas.getReservas().subscribe(rest => {
       this.dataSource = new MatTableDataSource(rest);
 
       this.dataSource.paginator = this.paginator;
@@ -63,31 +63,31 @@ export class ProfesoresComponent {
   }
 
 
-  delete(profesor: any) { 
+  delete(estudiante: any) { 
     this.openDialogDelete().afterClosed().subscribe(rest => {
       if(rest !== false) {
-        this.serviceProfesores.deleteEstudiante(profesor.id).subscribe(rest =>{
+        this.serviceReservas.deleteReserva(estudiante.id).subscribe(rest =>{
           this._sb.open('ELIMINADO CORRECTAMENTE!', '', {duration: 4000});
-          this.getProfesores();
+          this.getReservas();
         });
       }
     });
   }
 
   create() { 
-    this.openDialogCRUD(true, undefined, 'profesores', 'CREAR PROFESOR').afterClosed().subscribe(rest => {
+    this.openDialogCRUD(true, undefined, 'Reservas', 'CREAR NOTA').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('CREADO CORRECTAMENTE!', '', {duration: 4000})
-        this.getProfesores();
+        this.getReservas();
       }
     });
   }
 
-  update(profesor:any) { 
-    this.openDialogCRUD(false, profesor, 'profesores', 'CREAR PROFESOR').afterClosed().subscribe(rest => {
+  update(estudiante:any) { 
+    this.openDialogCRUD(false, estudiante, 'Reservas', 'ACTUALIZAR ESTUDIANTE').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('ACTUALIZADO CORRECTAMENTE!', '', {duration: 4000});
-        this.getProfesores();
+        this.getReservas();
       }
     });
   }

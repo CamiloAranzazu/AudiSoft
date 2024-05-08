@@ -16,9 +16,9 @@ export class NavBarComponent implements OnInit {
   url: any = '';
   // lista de estudiantes
     menu: any[] = [
-      {id: 1, name: 'NOTAS', active: true, ruta: '/notas' },
-      {id: 2, name: 'PROFESORES', active: false, ruta: '/profesores' },
-      {id: 3, name: 'ESTUDIANTES', active: false, ruta: '/estudiantes' },
+      {id: 1, name: 'RESERVAS', active: true, ruta: '/reservas' },
+      {id: 2, name: 'HABITACIONES', active: false, ruta: '/habitaciones' },
+      {id: 3, name: 'HOTELES', active: false, ruta: '/hoteles' },
     ];
 
     constructor(private router: Router, private ar: ActivatedRoute,) {

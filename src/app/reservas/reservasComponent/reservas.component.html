@@ -1,5 +1,5 @@
 <div class="btnCreate">
-  <button (click)="create()">Crear nuevo profesor</button>
+  <button (click)="create()">Crear nueva reserva</button>
 </div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -15,13 +15,29 @@
     <!-- Name Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> Id </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.reserva.id}} </td>
     </ng-container>
-  
+
     <!-- Weight Column -->
-    <ng-container matColumnDef="estudiante">
-      <th mat-header-cell *matHeaderCellDef> Nombre Estudiante </th>
-      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Nombre  </th>
+      <td mat-cell *matCellDef="let element"> {{element.reserva.nombre}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ciudad">
+      <th mat-header-cell *matHeaderCellDef> Ciudad  </th>
+      <td mat-cell *matCellDef="let element"> {{element.city.nombre}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="hotel">
+      <th mat-header-cell *matHeaderCellDef> Hotel  </th>
+      <td mat-cell *matCellDef="let element"> {{element.hotel.nombre}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="precio">
+      <th mat-header-cell *matHeaderCellDef> Precio  </th>
+      <td mat-cell *matCellDef="let element"> {{element.habitacion.priceAlto}} </td>
     </ng-container>
 
   

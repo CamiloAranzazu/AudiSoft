@@ -2,11 +2,11 @@
 <mat-dialog-content>
   <form [formGroup]="form" *ngIf="data.model !== 'notas'">
     <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Nombre y Apellido</mat-label>
+      <mat-label>Nombre</mat-label>
       <input matInput formControlName="nombre">
     </mat-form-field>
   </form>
-  <form [formGroup]="formNotas" *ngIf="data.model === 'notas'">
+  <form [formGroup]="formReservas" *ngIf="data.model === 'notas'">
     <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Nombre</mat-label>
       <input matInput formControlName="nombre">
@@ -14,7 +14,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Profesor</mat-label>
       <select matNativeControl required formControlName="IdProfesor">
-        @for (item of profesores; track $index) {
+        @for (item of Hoteles; track $index) {
           <option [value]="item.id">{{item.nombre}}</option>
         }
       </select>
@@ -22,7 +22,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Estudiante</mat-label>
       <select matNativeControl required formControlName="IdEstudiante">
-        @for (item of estudiantes; track $index) {
+        @for (item of Habitaciones; track $index) {
           <option [value]="item.id">{{item.nombre}}</option>
         }
       </select>
@@ -36,5 +36,5 @@
 <mat-dialog-actions class="actions">
   <button mat-stroked-button  (click)="close()" >CANCELAR</button>
   <button mat-button class="btnAction" *ngIf="data.model !== 'notas'" (click)="save()">{{data.title || 'SIN LITERAL'}}</button>
-  <button mat-button class="btnAction" *ngIf="data.model === 'notas'" (click)="saveNotas()">{{data.title || 'SIN LITERAL'}}</button>
-</mat-dialog-actions>  
+  <button mat-button class="btnAction" *ngIf="data.model === 'notas'" (click)="saveReservas()">{{data.title || 'SIN LITERAL'}}</button>
+</mat-dialog-actions>       
