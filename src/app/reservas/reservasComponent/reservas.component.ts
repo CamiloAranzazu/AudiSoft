@@ -66,7 +66,7 @@ export class ReservasComponent {
   delete(estudiante: any) { 
     this.openDialogDelete().afterClosed().subscribe(rest => {
       if(rest !== false) {
-        this.serviceReservas.deleteReserva(estudiante.id).subscribe(rest =>{
+        this.serviceReservas.deleteReserva(estudiante.reserva.id).subscribe(rest =>{
           this._sb.open('ELIMINADO CORRECTAMENTE!', '', {duration: 4000});
           this.getReservas();
         });
@@ -75,7 +75,7 @@ export class ReservasComponent {
   }
 
   create() { 
-    this.openDialogCRUD(true, undefined, 'Reservas', 'CREAR NOTA').afterClosed().subscribe(rest => {
+    this.openDialogCRUD(true, undefined, 'Reservas', 'CREAR').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('CREADO CORRECTAMENTE!', '', {duration: 4000})
         this.getReservas();
@@ -84,7 +84,7 @@ export class ReservasComponent {
   }
 
   update(estudiante:any) { 
-    this.openDialogCRUD(false, estudiante, 'Reservas', 'ACTUALIZAR ESTUDIANTE').afterClosed().subscribe(rest => {
+    this.openDialogCRUD(false, estudiante, 'Reservas', 'ACTUALIZAR').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('ACTUALIZADO CORRECTAMENTE!', '', {duration: 4000});
         this.getReservas();

@@ -61,18 +61,18 @@ export class HotelesComponent {
   }
 
 
-  delete(estudiante: any) { 
+  delete(data: any) {
     this.openDialogDelete().afterClosed().subscribe(rest => {
       if(rest !== false) {
-        this.serviceHoteles.deleteHotel(estudiante.id).subscribe(rest =>{
+        this.serviceHoteles.deleteHotel(data.hotel.id).subscribe(rest =>{
           this._sb.open('ELIMINADO CORRECTAMENTE!', '', {duration: 4000});
           this.getHoteles();
         });
       }
     });
-  }
+  } 
 
-  create() { 
+  create() {
     this.openDialogCRUD(true, undefined, 'Hoteles', 'CREAR').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('CREADO CORRECTAMENTE!', '', {duration: 4000})
@@ -81,8 +81,8 @@ export class HotelesComponent {
     });
   }
 
-  update(estudiante:any) { 
-    this.openDialogCRUD(false, estudiante, 'Hoteles', 'ACTUALIZAR').afterClosed().subscribe(rest => {
+  update(data:any) { 
+    this.openDialogCRUD(false, data, 'Hoteles', 'ACTUALIZAR').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('ACTUALIZADO CORRECTAMENTE!', '', {duration: 4000});
         this.getHoteles();

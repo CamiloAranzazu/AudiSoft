@@ -63,10 +63,10 @@ export class HabitacionesComponent {
   }
 
 
-  delete(profesor: any) { 
+  delete(data: any) { 
     this.openDialogDelete().afterClosed().subscribe(rest => {
       if(rest !== false) {
-        this.serviceHabitaciones.deleteHabitacion(profesor.id).subscribe(rest =>{
+        this.serviceHabitaciones.deleteHabitacion(data.habitacion.id).subscribe(rest =>{
           this._sb.open('ELIMINADO CORRECTAMENTE!', '', {duration: 4000});
           this.getHabitaciones();
         });
@@ -84,7 +84,7 @@ export class HabitacionesComponent {
   }
 
   update(profesor:any) { 
-    this.openDialogCRUD(false, profesor, 'Habitaciones', 'CREAR').afterClosed().subscribe(rest => {
+    this.openDialogCRUD(false, profesor, 'Habitaciones', 'ACTUALIZAR').afterClosed().subscribe(rest => {
       if(rest === true) {
         this._sb.open('ACTUALIZADO CORRECTAMENTE!', '', {duration: 4000});
         this.getHabitaciones();

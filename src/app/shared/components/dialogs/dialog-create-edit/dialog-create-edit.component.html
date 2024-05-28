@@ -1,37 +1,36 @@
 <h2 mat-dialog-title>{{data.title || 'SIN LITERAL'}}</h2>
 <mat-dialog-content>
-  <form [formGroup]="form" *ngIf="data.model !== 'notas'">
+  <form [formGroup]="form" *ngIf="data.model === 'Hoteles'">
     <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Nombre</mat-label>
       <input matInput formControlName="nombre">
     </mat-form-field>
   </form>
-  <form [formGroup]="formReservas" *ngIf="data.model === 'notas'">
+  <form [formGroup]="formReservas" *ngIf="data.model === 'Reservas'">
     <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Nombre</mat-label>
       <input matInput formControlName="nombre">
     </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Profesor</mat-label>
-      <select matNativeControl required formControlName="IdProfesor">
-        @for (item of Hoteles; track $index) {
-          <option [value]="item.id">{{item.nombre}}</option>
-        }
-      </select>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Estudiante</mat-label>
-      <select matNativeControl required formControlName="IdEstudiante">
-        @for (item of Habitaciones; track $index) {
-          <option [value]="item.id">{{item.nombre}}</option>
-        }
-      </select>
+  </form>
+  <form [formGroup]="formHabitaciones" *ngIf="data.model === 'Habitaciones'">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre">
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Nota</mat-label>
-      <input matInput type="number" formControlName="valor">
+      <mat-label>Precio Bajo</mat-label>
+      <input matInput formControlName="PriceBajo">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Price Alto</mat-label>
+      <input matInput formControlName="PriceAlto">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Max Personas</mat-label>
+      <input matInput formControlName="MaxPersonas">
     </mat-form-field>
   </form>
+  
 </mat-dialog-content>
 <mat-dialog-actions class="actions">
   <button mat-stroked-button  (click)="close()" >CANCELAR</button>
